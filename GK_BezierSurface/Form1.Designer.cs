@@ -50,6 +50,27 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             radioButtonGrid = new RadioButton();
             radioButtonFill = new RadioButton();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            surfaceColorButton = new Button();
+            setLightButton = new Button();
+            importTextureButton = new Button();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            panel2 = new Panel();
+            label1 = new Label();
+            kd_trackBar = new TrackBar();
+            trackBar1 = new TrackBar();
+            panel3 = new Panel();
+            label2 = new Label();
+            ks_trackBar = new TrackBar();
+            panel4 = new Panel();
+            M = new Label();
+            m_trackBar = new TrackBar();
+            tableLayoutPanel5 = new TableLayoutPanel();
+            startAnimationBtn = new Button();
+            panel5 = new Panel();
+            z_label = new Label();
+            label3 = new Label();
+            z_trackBar = new TrackBar();
             contextMenuStrip1 = new ContextMenuStrip(components);
             menuStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -61,6 +82,18 @@
             panelRotateOZ.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)rotateOZSlider).BeginInit();
             tableLayoutPanel2.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)kd_trackBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ks_trackBar).BeginInit();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)m_trackBar).BeginInit();
+            tableLayoutPanel5.SuspendLayout();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)z_trackBar).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -70,7 +103,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(3, 1, 0, 1);
-            menuStrip1.Size = new Size(955, 24);
+            menuStrip1.Size = new Size(1384, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -91,8 +124,8 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 1000F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(drawingPanel, 0, 0);
             tableLayoutPanel1.Controls.Add(slidersTableLayout, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
@@ -101,7 +134,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(955, 473);
+            tableLayoutPanel1.Size = new Size(1384, 937);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // drawingPanel
@@ -111,7 +144,7 @@
             drawingPanel.Location = new Point(2, 1);
             drawingPanel.Margin = new Padding(2, 1, 2, 1);
             drawingPanel.Name = "drawingPanel";
-            drawingPanel.Size = new Size(712, 471);
+            drawingPanel.Size = new Size(996, 935);
             drawingPanel.TabIndex = 0;
             drawingPanel.Paint += drawingPanel_Paint;
             // 
@@ -123,17 +156,23 @@
             slidersTableLayout.Controls.Add(panelRotateOX, 0, 1);
             slidersTableLayout.Controls.Add(panelRotateOZ, 0, 2);
             slidersTableLayout.Controls.Add(tableLayoutPanel2, 0, 3);
-            slidersTableLayout.Dock = DockStyle.Top;
-            slidersTableLayout.Location = new Point(718, 1);
+            slidersTableLayout.Controls.Add(tableLayoutPanel3, 0, 4);
+            slidersTableLayout.Controls.Add(tableLayoutPanel4, 0, 5);
+            slidersTableLayout.Controls.Add(tableLayoutPanel5, 0, 6);
+            slidersTableLayout.Dock = DockStyle.Fill;
+            slidersTableLayout.Location = new Point(1002, 1);
             slidersTableLayout.Margin = new Padding(2, 1, 2, 1);
             slidersTableLayout.Name = "slidersTableLayout";
-            slidersTableLayout.RowCount = 5;
+            slidersTableLayout.RowCount = 8;
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
-            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 47F));
-            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 47F));
-            slidersTableLayout.Size = new Size(235, 260);
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 33F));
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 79F));
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            slidersTableLayout.Size = new Size(380, 935);
             slidersTableLayout.TabIndex = 1;
             // 
             // panel1
@@ -145,7 +184,7 @@
             panel1.Location = new Point(2, 1);
             panel1.Margin = new Padding(2, 1, 2, 1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(231, 64);
+            panel1.Size = new Size(376, 64);
             panel1.TabIndex = 0;
             // 
             // gridSizeSlider
@@ -156,22 +195,22 @@
             gridSizeSlider.Maximum = 40;
             gridSizeSlider.Minimum = 10;
             gridSizeSlider.Name = "gridSizeSlider";
-            gridSizeSlider.Size = new Size(231, 45);
+            gridSizeSlider.Size = new Size(376, 45);
             gridSizeSlider.TabIndex = 2;
-            gridSizeSlider.Value = 20;
+            gridSizeSlider.Value = 32;
             gridSizeSlider.ValueChanged += gridSizeSlider_ValueChanged;
             // 
             // gridSizeVal
             // 
             gridSizeVal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             gridSizeVal.AutoSize = true;
-            gridSizeVal.Location = new Point(204, -1);
+            gridSizeVal.Location = new Point(348, 1);
             gridSizeVal.Margin = new Padding(2, 0, 2, 0);
             gridSizeVal.Name = "gridSizeVal";
             gridSizeVal.Padding = new Padding(1);
             gridSizeVal.Size = new Size(21, 17);
             gridSizeVal.TabIndex = 1;
-            gridSizeVal.Text = "20";
+            gridSizeVal.Text = "32";
             // 
             // gridSizeDesc
             // 
@@ -193,7 +232,7 @@
             panelRotateOX.Location = new Point(2, 67);
             panelRotateOX.Margin = new Padding(2, 1, 2, 1);
             panelRotateOX.Name = "panelRotateOX";
-            panelRotateOX.Size = new Size(231, 64);
+            panelRotateOX.Size = new Size(376, 64);
             panelRotateOX.TabIndex = 1;
             // 
             // rotateOXSlider
@@ -202,14 +241,14 @@
             rotateOXSlider.Location = new Point(0, 19);
             rotateOXSlider.Margin = new Padding(2, 1, 2, 1);
             rotateOXSlider.Name = "rotateOXSlider";
-            rotateOXSlider.Size = new Size(231, 45);
+            rotateOXSlider.Size = new Size(376, 45);
             rotateOXSlider.TabIndex = 2;
             rotateOXSlider.ValueChanged += rotateOXSlider_ValueChanged;
             // 
             // rotateOXVal
             // 
             rotateOXVal.AutoSize = true;
-            rotateOXVal.Location = new Point(213, -1);
+            rotateOXVal.Location = new Point(354, 0);
             rotateOXVal.Margin = new Padding(2, 0, 2, 0);
             rotateOXVal.Name = "rotateOXVal";
             rotateOXVal.Padding = new Padding(1);
@@ -237,7 +276,7 @@
             panelRotateOZ.Location = new Point(2, 133);
             panelRotateOZ.Margin = new Padding(2, 1, 2, 1);
             panelRotateOZ.Name = "panelRotateOZ";
-            panelRotateOZ.Size = new Size(231, 64);
+            panelRotateOZ.Size = new Size(376, 64);
             panelRotateOZ.TabIndex = 2;
             // 
             // rotateOZSlider
@@ -248,14 +287,14 @@
             rotateOZSlider.Maximum = 45;
             rotateOZSlider.Minimum = -45;
             rotateOZSlider.Name = "rotateOZSlider";
-            rotateOZSlider.Size = new Size(231, 45);
+            rotateOZSlider.Size = new Size(376, 45);
             rotateOZSlider.TabIndex = 2;
             rotateOZSlider.ValueChanged += rotateOZSlider_ValueChanged;
             // 
             // rotateOZVal
             // 
             rotateOZVal.AutoSize = true;
-            rotateOZVal.Location = new Point(213, 0);
+            rotateOZVal.Location = new Point(354, 1);
             rotateOZVal.Margin = new Padding(2, 0, 2, 0);
             rotateOZVal.Name = "rotateOZVal";
             rotateOZVal.Padding = new Padding(1);
@@ -286,8 +325,8 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(229, 41);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            tableLayoutPanel2.Size = new Size(374, 27);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // radioButtonGrid
@@ -297,7 +336,7 @@
             radioButtonGrid.Dock = DockStyle.Fill;
             radioButtonGrid.Location = new Point(3, 3);
             radioButtonGrid.Name = "radioButtonGrid";
-            radioButtonGrid.Size = new Size(108, 35);
+            radioButtonGrid.Size = new Size(181, 21);
             radioButtonGrid.TabIndex = 0;
             radioButtonGrid.TabStop = true;
             radioButtonGrid.Text = "Draw Grid";
@@ -308,13 +347,263 @@
             // 
             radioButtonFill.AutoSize = true;
             radioButtonFill.Dock = DockStyle.Fill;
-            radioButtonFill.Location = new Point(117, 3);
+            radioButtonFill.Location = new Point(190, 3);
             radioButtonFill.Name = "radioButtonFill";
-            radioButtonFill.Size = new Size(109, 35);
+            radioButtonFill.Size = new Size(181, 21);
             radioButtonFill.TabIndex = 1;
             radioButtonFill.Text = "Fill triangles";
             radioButtonFill.UseVisualStyleBackColor = true;
             radioButtonFill.Click += radioButtonFill_Click;
+            // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.34F));
+            tableLayoutPanel3.Controls.Add(surfaceColorButton, 0, 0);
+            tableLayoutPanel3.Controls.Add(setLightButton, 1, 0);
+            tableLayoutPanel3.Controls.Add(importTextureButton, 2, 0);
+            tableLayoutPanel3.Dock = DockStyle.Fill;
+            tableLayoutPanel3.Location = new Point(2, 232);
+            tableLayoutPanel3.Margin = new Padding(2, 1, 2, 1);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 39F));
+            tableLayoutPanel3.Size = new Size(376, 40);
+            tableLayoutPanel3.TabIndex = 4;
+            // 
+            // surfaceColorButton
+            // 
+            surfaceColorButton.BackColor = Color.LightBlue;
+            surfaceColorButton.Dock = DockStyle.Fill;
+            surfaceColorButton.Font = new Font("Segoe UI", 7.875F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            surfaceColorButton.Location = new Point(2, 1);
+            surfaceColorButton.Margin = new Padding(2, 1, 2, 1);
+            surfaceColorButton.Name = "surfaceColorButton";
+            surfaceColorButton.Size = new Size(121, 38);
+            surfaceColorButton.TabIndex = 0;
+            surfaceColorButton.Text = "Set surface color";
+            surfaceColorButton.UseVisualStyleBackColor = false;
+            surfaceColorButton.Click += surfaceColorButton_Click;
+            // 
+            // setLightButton
+            // 
+            setLightButton.Dock = DockStyle.Fill;
+            setLightButton.Font = new Font("Segoe UI", 8F);
+            setLightButton.Location = new Point(127, 1);
+            setLightButton.Margin = new Padding(2, 1, 2, 1);
+            setLightButton.Name = "setLightButton";
+            setLightButton.Size = new Size(121, 38);
+            setLightButton.TabIndex = 1;
+            setLightButton.Text = "Set light color";
+            setLightButton.UseVisualStyleBackColor = true;
+            setLightButton.Click += setLightButton_Click;
+            // 
+            // importTextureButton
+            // 
+            importTextureButton.Dock = DockStyle.Fill;
+            importTextureButton.Font = new Font("Segoe UI", 8F);
+            importTextureButton.Location = new Point(252, 1);
+            importTextureButton.Margin = new Padding(2, 1, 2, 1);
+            importTextureButton.Name = "importTextureButton";
+            importTextureButton.Size = new Size(122, 38);
+            importTextureButton.TabIndex = 2;
+            importTextureButton.Text = "Import texture";
+            importTextureButton.UseVisualStyleBackColor = true;
+            importTextureButton.Click += importTextureButton_Click;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 3;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel4.Controls.Add(panel2, 0, 0);
+            tableLayoutPanel4.Controls.Add(panel3, 1, 0);
+            tableLayoutPanel4.Controls.Add(panel4, 2, 0);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(2, 274);
+            tableLayoutPanel4.Margin = new Padding(2, 1, 2, 1);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 63F));
+            tableLayoutPanel4.Size = new Size(376, 64);
+            tableLayoutPanel4.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(kd_trackBar);
+            panel2.Controls.Add(trackBar1);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(2, 1);
+            panel2.Margin = new Padding(2, 1, 2, 1);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(121, 62);
+            panel2.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(4, 2);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(22, 15);
+            label1.TabIndex = 2;
+            label1.Text = "KD";
+            // 
+            // kd_trackBar
+            // 
+            kd_trackBar.Location = new Point(2, 17);
+            kd_trackBar.Margin = new Padding(2, 1, 2, 1);
+            kd_trackBar.Maximum = 100;
+            kd_trackBar.Name = "kd_trackBar";
+            kd_trackBar.Size = new Size(92, 45);
+            kd_trackBar.TabIndex = 1;
+            kd_trackBar.Value = 75;
+            kd_trackBar.ValueChanged += kd_trackBar_ValueChanged;
+            // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(2, 17);
+            trackBar1.Margin = new Padding(2, 1, 2, 1);
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(92, 45);
+            trackBar1.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(ks_trackBar);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(127, 1);
+            panel3.Margin = new Padding(2, 1, 2, 1);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(121, 62);
+            panel3.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(2, 2);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(20, 15);
+            label2.TabIndex = 1;
+            label2.Text = "KS";
+            // 
+            // ks_trackBar
+            // 
+            ks_trackBar.Location = new Point(0, 17);
+            ks_trackBar.Margin = new Padding(2, 1, 2, 1);
+            ks_trackBar.Maximum = 100;
+            ks_trackBar.Name = "ks_trackBar";
+            ks_trackBar.Size = new Size(94, 45);
+            ks_trackBar.TabIndex = 0;
+            ks_trackBar.Value = 75;
+            ks_trackBar.ValueChanged += ks_trackBar_ValueChanged;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(M);
+            panel4.Controls.Add(m_trackBar);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(252, 1);
+            panel4.Margin = new Padding(2, 1, 2, 1);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(122, 62);
+            panel4.TabIndex = 2;
+            // 
+            // M
+            // 
+            M.AutoSize = true;
+            M.Location = new Point(2, 2);
+            M.Margin = new Padding(2, 0, 2, 0);
+            M.Name = "M";
+            M.Size = new Size(18, 15);
+            M.TabIndex = 1;
+            M.Text = "M";
+            // 
+            // m_trackBar
+            // 
+            m_trackBar.Location = new Point(2, 17);
+            m_trackBar.Margin = new Padding(2, 1, 2, 1);
+            m_trackBar.Maximum = 100;
+            m_trackBar.Name = "m_trackBar";
+            m_trackBar.Size = new Size(92, 45);
+            m_trackBar.TabIndex = 0;
+            m_trackBar.Value = 10;
+            m_trackBar.ValueChanged += m_trackBar_ValueChanged;
+            // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 2;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.6987953F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75.30121F));
+            tableLayoutPanel5.Controls.Add(startAnimationBtn, 0, 0);
+            tableLayoutPanel5.Controls.Add(panel5, 1, 0);
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            tableLayoutPanel5.Location = new Point(3, 342);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 1;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel5.Size = new Size(374, 73);
+            tableLayoutPanel5.TabIndex = 6;
+            // 
+            // startAnimationBtn
+            // 
+            startAnimationBtn.Dock = DockStyle.Fill;
+            startAnimationBtn.Location = new Point(3, 3);
+            startAnimationBtn.Name = "startAnimationBtn";
+            startAnimationBtn.Size = new Size(86, 67);
+            startAnimationBtn.TabIndex = 0;
+            startAnimationBtn.Text = "Start Animation";
+            startAnimationBtn.UseVisualStyleBackColor = true;
+            startAnimationBtn.Click += startAnimationBtn_Click_1;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(z_label);
+            panel5.Controls.Add(label3);
+            panel5.Controls.Add(z_trackBar);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(95, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(276, 67);
+            panel5.TabIndex = 1;
+            // 
+            // z_label
+            // 
+            z_label.AutoSize = true;
+            z_label.Location = new Point(247, 1);
+            z_label.Name = "z_label";
+            z_label.Size = new Size(25, 15);
+            z_label.TabIndex = 2;
+            z_label.Text = "350";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 1);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 15);
+            label3.TabIndex = 1;
+            label3.Text = "Z = const";
+            // 
+            // z_trackBar
+            // 
+            z_trackBar.Dock = DockStyle.Bottom;
+            z_trackBar.Location = new Point(0, 22);
+            z_trackBar.Maximum = 500;
+            z_trackBar.Minimum = 120;
+            z_trackBar.Name = "z_trackBar";
+            z_trackBar.Size = new Size(276, 45);
+            z_trackBar.TabIndex = 0;
+            z_trackBar.Value = 350;
+            z_trackBar.ValueChanged += z_trackBar_ValueChanged;
             // 
             // contextMenuStrip1
             // 
@@ -326,7 +615,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(955, 497);
+            ClientSize = new Size(1384, 961);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -353,6 +642,22 @@
             ((System.ComponentModel.ISupportInitialize)rotateOZSlider).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)kd_trackBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ks_trackBar).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)m_trackBar).EndInit();
+            tableLayoutPanel5.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)z_trackBar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -381,5 +686,26 @@
         private TableLayoutPanel tableLayoutPanel2;
         private RadioButton radioButtonGrid;
         private RadioButton radioButtonFill;
+        private TableLayoutPanel tableLayoutPanel3;
+        private Button surfaceColorButton;
+        private Button setLightButton;
+        private Button importTextureButton;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Panel panel2;
+        private TrackBar trackBar1;
+        private Panel panel3;
+        private Panel panel4;
+        private TrackBar kd_trackBar;
+        private TrackBar ks_trackBar;
+        private TrackBar m_trackBar;
+        private Label label1;
+        private Label label2;
+        private Label M;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Button startAnimationBtn;
+        private Panel panel5;
+        private TrackBar z_trackBar;
+        private Label label3;
+        private Label z_label;
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GK_BezierSurface")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6eb4294c6e2bcfee7d31081ddb81d994588223d")]
 [assembly: System.Reflection.AssemblyProductAttribute("GK_BezierSurface")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GK_BezierSurface")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

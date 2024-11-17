@@ -120,8 +120,6 @@ namespace GK_BezierSurface
 
 
 
-
-
         public void RotateOX(float angle)
         {
             // Konwersja ze stopni na radiany
@@ -136,7 +134,7 @@ namespace GK_BezierSurface
             // Konwersja ze stopni na radiany
             float angleRadian = MathF.PI * angle / 180.0f;
 
-            Matrix4x4 rotationMatrix = Matrix4x4.CreateRotationY(angleRadian);
+            Matrix4x4 rotationMatrix = Matrix4x4.CreateRotationZ(angleRadian);
             prevR = Vector3.Transform(prevR, rotationMatrix);
         }
     }

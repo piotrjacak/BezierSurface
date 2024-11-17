@@ -20,32 +20,26 @@ namespace GK_BezierSurface
             {
                 ymax = p2.Y;
                 ymin = p1.Y;
+                xmin = p1.X;
             }
             else
             {
                 ymax = p1.Y;
                 ymin = p2.Y;
-            }
-
-            if (p1.X < p2.X)
-            {
-                xmin = p1.X;
-            }
-            else
-            {
                 xmin = p2.X;
             }
 
-            if (p1.X == p2.X)
+            if (Math.Abs(p1.Y - p2.Y) < float.Epsilon)
             {
                 inverseSlope = 0;
             }
             else
             {
-                inverseSlope = (p2.Y - p1.Y) / (p2.X - p1.X);
+                inverseSlope = (p2.X - p1.X) / (p2.Y - p1.Y);
             }
         }
 
+        // Konstruktor do głębokiej kopii
         public Edge(Edge edge)
         {
             this.ymax = edge.ymax;

@@ -1,5 +1,8 @@
+Ôªøusing System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Numerics;
+using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
 using System.Windows.Forms.VisualStyles;
@@ -19,30 +22,65 @@ namespace GK_BezierSurface
         public int beta { get; set; }
         public bool pointsLoaded { get; set; }
 
+        public SolidBrush fillColor { get; set; }
+        public SolidBrush lightColor { get; set; }
+
+        public float kd { get; set; }
+        public float ks { get; set; }
+        public int m { get; set; }
+
+        public Vector3 lightDirection { get; set; }
+        public float zAnimation { get; set; }
+        public bool isAnimated { get; set; }
+        public System.Windows.Forms.Timer animationTimer { get; set; }
+        public float angle = 0f;
+
+
         public Form1()
         {
             InitializeComponent();
             //this.Size = new Size(2000, 1400);
-            this.Size = new Size(1400, 800); // Rozmiar odpowiedni dla wyúwietlacza 1920x1080
+            this.Size = new Size(1400, 800); // Rozmiar odpowiedni dla wy≈õwietlacza 1920x1080
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            // Bitmapa i punkty kontrolne
             bitmap = new DirectBitmap(drawingPanel.Width, drawingPanel.Height);
             controlPoints = new Vertex[4, 4];
             triangles = new List<Triangle>();
 
+            // KƒÖty obrotu i rozmiar siatki
             prevAlpha = 0;
             alpha = 0;
             prevBeta = 0;
             beta = 0;
-            gridSize = 20;
+            gridSize = gridSizeSlider.Value;
             pointsLoaded = false;
+
+            // Kolory wype≈Çnienia i ≈õwiat≈Ça
+            fillColor = new SolidBrush(Color.LightBlue);
+            lightColor = new SolidBrush(Color.White);
+
+            // Wsp√≥≈Çczynniki o≈õwietlenia
+            kd = (float)kd_trackBar.Value / 100;
+            ks = (float)ks_trackBar.Value / 100;
+            m = m_trackBar.Value;
+
+            // Animacja
+            zAnimation = z_trackBar.Value;
+            animationTimer = new System.Windows.Forms.Timer();
+            animationTimer.Interval = 500;
+            animationTimer.Tick += (sender, args) => AnimationTimer_Tick(sender, args);
+            isAnimated = false;
+
+            // ≈öwiat≈Ço
+            lightDirection = new Vector3(120, 120, zAnimation);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
         }
 
-        // Funkcja do odúwieøania panelu
+        // Funkcja do od≈õwie≈ºania panelu
         private void drawingPanel_Paint(object sender, PaintEventArgs e)
         {
             if (!pointsLoaded) return;
@@ -61,15 +99,7 @@ namespace GK_BezierSurface
                 g.ScaleTransform(1, -1);
                 g.TranslateTransform(drawingPanel.Width / 2, -drawingPanel.Height / 2);
 
-                for (int i = 0; i < 4; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        g.FillEllipse(Brushes.Green, controlPoints[i, j].prevR.X - 5, controlPoints[i, j].prevR.Y - 5, 10, 10);
-                    }
-                }
-
-                int k = 0;
+                // Wype≈Çnianie tr√≥jkƒÖt√≥w
                 foreach (Triangle triangle in triangles)
                 {
                     if (radioButtonGrid.Checked)
@@ -78,20 +108,25 @@ namespace GK_BezierSurface
                     }
                     else if (radioButtonFill.Checked)
                     {
-                        triangle.DrawTriangle(g);
-
-                        triangle.FillTriangle(g);
-                        //if (k == 20) return;
+                        triangle.FillTriangle(g, bitmap);
                     }
-                    k++;
-
                 }
 
+                // Rysowanie linii miedzy punktami kontrolnymi
                 DrawControlLines(g);
+
+                // Punkty kontrolne
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        g.FillEllipse(Brushes.Green, controlPoints[i, j].prevR.X - 5, controlPoints[i, j].prevR.Y - 5, 10, 10);
+                    }
+                }
             }
         }
 
-        // Funkcja do rysowania linii siatki miÍdzy punktami kontrolnymi
+        // Funkcja do rysowania linii siatki miƒôdzy punktami kontrolnymi
         private void DrawControlLines(Graphics g)
         {
             Pen pen = new Pen(Brushes.Black);
@@ -122,12 +157,12 @@ namespace GK_BezierSurface
         }
 
 
-        // Funkcja pomocnicza wyznaczajπca siatkÍ trÛjkπtÛw
+        // Funkcja pomocnicza wyznaczajƒÖca siatkƒô tr√≥jkƒÖt√≥w
         private void SetUpTriangles()
         {
             List<Vertex> points = new List<Vertex>();
 
-            // Obliczenie punktÛw Beziera
+            // Obliczenie punkt√≥w Beziera
             for (int i = 0; i <= gridSize; i++)
             {
                 float u = i / (float)gridSize;
@@ -152,7 +187,7 @@ namespace GK_BezierSurface
                 }
             }
 
-            // Wyznaczenie trÛjkπtÛw i dodanie do listy
+            // Wyznaczenie tr√≥jkƒÖt√≥w i dodanie do listy
             for (int i = 0; i < gridSize; i++)
             {
                 for (int j = 0; j < gridSize; j++)
@@ -164,14 +199,12 @@ namespace GK_BezierSurface
                     Vertex p3 = points[index + gridSize + 1];
                     Vertex p4 = points[index + gridSize + 2];
 
-                    //Triangle t1 = new Triangle(p1, p2, p3);
-                    //triangles.Add(t1);
-                    Triangle t2 = new Triangle(p2, p3, p4);
+                    Triangle t1 = new Triangle(p1, p2, p3, this.kd, this.ks, this.m,
+                        fillColor, lightColor, lightDirection);
+                    triangles.Add(t1);
+                    Triangle t2 = new Triangle(p2, p3, p4, this.kd, this.ks, this.m,
+                        fillColor, lightColor, lightDirection);
                     triangles.Add(t2);
-
-                    return;
-
-                    //if (j == 0) return;
                 }
             }
         }
@@ -183,10 +216,12 @@ namespace GK_BezierSurface
             this.gridSize = gridSizeSlider.Value;
             gridSizeVal.Text = gridSizeSlider.Value.ToString();
 
+            triangles = new List<Triangle>();
+            SetUpTriangles();
             drawingPanel.Invalidate();
         }
 
-        // ObrÛt wzd≥uø osi OX
+        // Obr√≥t wzd≈Çu≈º osi OX
         private void rotateOXSlider_ValueChanged(object sender, EventArgs e)
         {
             this.prevBeta = this.beta;
@@ -207,7 +242,7 @@ namespace GK_BezierSurface
             drawingPanel.Invalidate();
         }
 
-        // ObrÛt wzd≥uø osi OZ
+        // Obr√≥t wzd≈Çu≈º osi OZ
         private void rotateOZSlider_ValueChanged(object sender, EventArgs e)
         {
             this.prevAlpha = this.alpha;
@@ -233,11 +268,11 @@ namespace GK_BezierSurface
 
 
 
-        // Wczytywanie punktÛw kontrolnych z pliku
+        // Wczytywanie punkt√≥w kontrolnych z pliku
         private void ReadPoints(string filePath)
         {
-            // Wczytywanie punktÛw zak≥ada, øe punkty kontrolne sπ wypisane w pliku tekstowym
-            // Od lewej do prawej i od gÛry do do≥u (patrzπc z gÛry na siatkÍ)
+            // Wczytywanie punkt√≥w zak≈Çada, ≈ºe punkty kontrolne sƒÖ wypisane w pliku tekstowym
+            // Od lewej do prawej i od g√≥ry do do≈Çu (patrzƒÖc z g√≥ry na siatkƒô)
             int level = 0;
             try
             {
@@ -276,7 +311,7 @@ namespace GK_BezierSurface
             }
         }
 
-        // Wczytywanie pliku i odúwieøanie panelu
+        // Wczytywanie pliku i od≈õwie≈ºanie panelu
         private void loadPointsFromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             controlPoints = new Vertex[4, 4];
@@ -304,11 +339,128 @@ namespace GK_BezierSurface
 
         private void radioButtonGrid_Click(object sender, EventArgs e)
         {
+            triangles = new List<Triangle>();
+            SetUpTriangles();
             drawingPanel.Invalidate();
         }
 
         private void radioButtonFill_Click(object sender, EventArgs e)
         {
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+            drawingPanel.Invalidate();
+        }
+
+        private void surfaceColorButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog MyDialog = new ColorDialog();
+            MyDialog.AllowFullOpen = false;
+
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+                fillColor = new SolidBrush(MyDialog.Color);
+                surfaceColorButton.BackColor = MyDialog.Color;
+            }
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+            drawingPanel.Invalidate();
+        }
+
+        private void setLightButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog MyDialog = new ColorDialog();
+            MyDialog.AllowFullOpen = false;
+
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+                lightColor = new SolidBrush(MyDialog.Color);
+                setLightButton.BackColor = MyDialog.Color;
+            }
+
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+            drawingPanel.Invalidate();
+        }
+
+        private void importTextureButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kd_trackBar_ValueChanged(object sender, EventArgs e)
+        {
+            kd = (float)kd_trackBar.Value / 100;
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+
+            drawingPanel.Invalidate();
+        }
+
+        private void ks_trackBar_ValueChanged(object sender, EventArgs e)
+        {
+            ks = (float)ks_trackBar.Value / 100;
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+
+            drawingPanel.Invalidate();
+        }
+
+        private void m_trackBar_ValueChanged(object sender, EventArgs e)
+        {
+            m = m_trackBar.Value;
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+
+            drawingPanel.Invalidate();
+        }
+
+        private void z_trackBar_ValueChanged(object sender, EventArgs e)
+        {
+            zAnimation = z_trackBar.Value;
+            z_label.Text = zAnimation.ToString();
+
+            lightDirection = new Vector3(lightDirection.X, lightDirection.Y, zAnimation);
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+
+            drawingPanel.Invalidate();
+        }
+
+        private void startAnimationBtn_Click_1(object sender, EventArgs e)
+        {
+            if (isAnimated && radioButtonFill.Checked)
+            {
+                // Zatrzymaj animacjƒô
+                this.Text = "Start Animation";
+                animationTimer.Stop();
+                isAnimated = false;
+            }
+            else
+            {
+                // Rozpocznij animacjƒô
+                this.Text = "Stop Animation";
+                animationTimer.Start();
+                isAnimated = true;
+            }
+        }
+
+        // Animacja
+        private void AnimationTimer_Tick(object? sender, EventArgs e)
+        {
+            PointF center = new PointF(0, 0);
+            float radius = 120;
+
+            angle += (float)Math.PI / 5;
+            Vector3 light = new Vector3();
+
+            light.X = center.X + radius * (float)Math.Cos(angle);
+            light.Y = center.Y + radius * (float)Math.Sin(angle);
+            light.Z = zAnimation;
+
+            this.lightDirection = light;
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+
             drawingPanel.Invalidate();
         }
     }

@@ -14,3 +14,4 @@ C:\Users\piotr\source\repos\GK_BezierSurface\GK_BezierSurface\obj\Debug\net8.0-w
 C:\Users\piotr\source\repos\GK_BezierSurface\GK_BezierSurface\obj\Debug\net8.0-windows\GK_BezierSurface.pdb
 C:\Users\piotr\source\repos\GK_BezierSurface\GK_BezierSurface\obj\Debug\net8.0-windows\GK_BezierSurface.genruntimeconfig.cache
 C:\Users\piotr\source\repos\GK_BezierSurface\GK_BezierSurface\obj\Debug\net8.0-windows\ref\GK_BezierSurface.dll
+C:\Users\piotr\source\repos\GK_BezierSurface\GK_BezierSurface\obj\Debug\net8.0-windows\GK_BezierSurface.sourcelink.json

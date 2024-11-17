@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|c:\\users\\piotr\\source\\repos\\gk_beziersurface\\gk_beziersurface\\triangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\triangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\triangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\triangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|c:\\users\\piotr\\source\\repos\\gk_beziersurface\\gk_beziersurface\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\initialpoints.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\initialpoints.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\directbitmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\directbitmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\directbitmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\directbitmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\gk_beziersurface\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F89326C-FF03-4D19-A8E6-C94F8C659E4C}|GK_BezierSurface\\GK_BezierSurface.csproj|solutionrelative:gk_beziersurface\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,20 +38,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 168,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "Triangle.cs",
+              "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Triangle.cs",
+              "RelativeDocumentMoniker": "GK_BezierSurface\\Triangle.cs",
+              "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Triangle.cs",
+              "RelativeToolTip": "GK_BezierSurface\\Triangle.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAiwEQAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T10:35:29.789Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Form1.cs",
               "RelativeDocumentMoniker": "GK_BezierSurface\\Form1.cs",
               "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Form1.cs",
               "RelativeToolTip": "GK_BezierSurface\\Form1.cs",
-              "ViewState": "AQIAAH0AAAAAAAAAAAAYwKsAAAAUAAAA",
+              "ViewState": "AQIAAKwBAAAAAAAAAAA1wMQBAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-05T10:27:52.523Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -59,61 +74,49 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Form1.cs",
               "RelativeDocumentMoniker": "GK_BezierSurface\\Form1.cs",
               "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Form1.cs [Design]",
               "RelativeToolTip": "GK_BezierSurface\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T22:41:50.214Z"
+              "WhenOpened": "2024-11-17T20:55:47.813Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "DirectBitmap.cs",
               "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\DirectBitmap.cs",
               "RelativeDocumentMoniker": "GK_BezierSurface\\DirectBitmap.cs",
               "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\DirectBitmap.cs",
               "RelativeToolTip": "GK_BezierSurface\\DirectBitmap.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAzwBsAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAawCIAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-07T20:32:06.343Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Triangle.cs",
-              "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Triangle.cs",
-              "RelativeDocumentMoniker": "GK_BezierSurface\\Triangle.cs",
-              "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Triangle.cs",
-              "RelativeToolTip": "GK_BezierSurface\\Triangle.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAAwEkAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T10:35:29.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Edge.cs",
               "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Edge.cs",
               "RelativeDocumentMoniker": "GK_BezierSurface\\Edge.cs",
               "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Edge.cs",
               "RelativeToolTip": "GK_BezierSurface\\Edge.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAC4AAAAJAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAuwB0AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-12T16:51:22.849Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "initialPoints.txt",
               "DocumentMoniker": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\initialPoints.txt",
               "RelativeDocumentMoniker": "GK_BezierSurface\\initialPoints.txt",
               "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\initialPoints.txt",
               "RelativeToolTip": "GK_BezierSurface\\initialPoints.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAMAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2024-11-05T14:55:09.601Z"
             },
@@ -125,7 +128,7 @@
               "RelativeDocumentMoniker": "GK_BezierSurface\\Vertex.cs",
               "ToolTip": "C:\\Users\\piotr\\source\\repos\\GK_BezierSurface\\GK_BezierSurface\\Vertex.cs",
               "RelativeToolTip": "GK_BezierSurface\\Vertex.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAIA6wD4AAAAdAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAcwDsAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-05T10:34:49.061Z"
             }
