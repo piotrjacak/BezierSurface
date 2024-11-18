@@ -50,6 +50,7 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             radioButtonGrid = new RadioButton();
             radioButtonFill = new RadioButton();
+            radioButtonTexture = new RadioButton();
             tableLayoutPanel3 = new TableLayoutPanel();
             surfaceColorButton = new Button();
             setLightButton = new Button();
@@ -71,6 +72,7 @@
             z_label = new Label();
             label3 = new Label();
             z_trackBar = new TrackBar();
+            checkBoxNormalMap = new CheckBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             menuStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -159,18 +161,20 @@
             slidersTableLayout.Controls.Add(tableLayoutPanel3, 0, 4);
             slidersTableLayout.Controls.Add(tableLayoutPanel4, 0, 5);
             slidersTableLayout.Controls.Add(tableLayoutPanel5, 0, 6);
+            slidersTableLayout.Controls.Add(checkBoxNormalMap, 0, 7);
             slidersTableLayout.Dock = DockStyle.Fill;
             slidersTableLayout.Location = new Point(1002, 1);
             slidersTableLayout.Margin = new Padding(2, 1, 2, 1);
             slidersTableLayout.Name = "slidersTableLayout";
-            slidersTableLayout.RowCount = 8;
+            slidersTableLayout.RowCount = 9;
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
-            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 33F));
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 79F));
+            slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             slidersTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             slidersTableLayout.Size = new Size(380, 935);
             slidersTableLayout.TabIndex = 1;
@@ -320,13 +324,14 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(radioButtonGrid, 0, 0);
             tableLayoutPanel2.Controls.Add(radioButtonFill, 1, 0);
+            tableLayoutPanel2.Controls.Add(radioButtonTexture, 0, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(3, 201);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
-            tableLayoutPanel2.Size = new Size(374, 27);
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(374, 60);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // radioButtonGrid
@@ -336,7 +341,7 @@
             radioButtonGrid.Dock = DockStyle.Fill;
             radioButtonGrid.Location = new Point(3, 3);
             radioButtonGrid.Name = "radioButtonGrid";
-            radioButtonGrid.Size = new Size(181, 21);
+            radioButtonGrid.Size = new Size(181, 24);
             radioButtonGrid.TabIndex = 0;
             radioButtonGrid.TabStop = true;
             radioButtonGrid.Text = "Draw Grid";
@@ -349,11 +354,25 @@
             radioButtonFill.Dock = DockStyle.Fill;
             radioButtonFill.Location = new Point(190, 3);
             radioButtonFill.Name = "radioButtonFill";
-            radioButtonFill.Size = new Size(181, 21);
+            radioButtonFill.Size = new Size(181, 24);
             radioButtonFill.TabIndex = 1;
-            radioButtonFill.Text = "Fill triangles";
+            radioButtonFill.Text = "Fill triangles - color";
             radioButtonFill.UseVisualStyleBackColor = true;
             radioButtonFill.Click += radioButtonFill_Click;
+            // 
+            // radioButtonTexture
+            // 
+            radioButtonTexture.AutoSize = true;
+            radioButtonTexture.Dock = DockStyle.Fill;
+            radioButtonTexture.Enabled = false;
+            radioButtonTexture.Location = new Point(3, 33);
+            radioButtonTexture.Name = "radioButtonTexture";
+            radioButtonTexture.Size = new Size(181, 24);
+            radioButtonTexture.TabIndex = 2;
+            radioButtonTexture.TabStop = true;
+            radioButtonTexture.Text = "Fill triangles - texture";
+            radioButtonTexture.UseVisualStyleBackColor = true;
+            radioButtonTexture.Click += radioButtonTexture_Click;
             // 
             // tableLayoutPanel3
             // 
@@ -365,7 +384,7 @@
             tableLayoutPanel3.Controls.Add(setLightButton, 1, 0);
             tableLayoutPanel3.Controls.Add(importTextureButton, 2, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(2, 232);
+            tableLayoutPanel3.Location = new Point(2, 265);
             tableLayoutPanel3.Margin = new Padding(2, 1, 2, 1);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
@@ -424,7 +443,7 @@
             tableLayoutPanel4.Controls.Add(panel3, 1, 0);
             tableLayoutPanel4.Controls.Add(panel4, 2, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(2, 274);
+            tableLayoutPanel4.Location = new Point(2, 307);
             tableLayoutPanel4.Margin = new Padding(2, 1, 2, 1);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
@@ -546,7 +565,7 @@
             tableLayoutPanel5.Controls.Add(startAnimationBtn, 0, 0);
             tableLayoutPanel5.Controls.Add(panel5, 1, 0);
             tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(3, 342);
+            tableLayoutPanel5.Location = new Point(3, 375);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -605,6 +624,18 @@
             z_trackBar.Value = 350;
             z_trackBar.ValueChanged += z_trackBar_ValueChanged;
             // 
+            // checkBoxNormalMap
+            // 
+            checkBoxNormalMap.AutoSize = true;
+            checkBoxNormalMap.Dock = DockStyle.Fill;
+            checkBoxNormalMap.Location = new Point(3, 454);
+            checkBoxNormalMap.Name = "checkBoxNormalMap";
+            checkBoxNormalMap.Size = new Size(374, 34);
+            checkBoxNormalMap.TabIndex = 7;
+            checkBoxNormalMap.Text = "Modify Normal Vectors";
+            checkBoxNormalMap.UseVisualStyleBackColor = true;
+            checkBoxNormalMap.Click += checkBoxNormalMap_Click;
+            // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(32, 32);
@@ -631,6 +662,7 @@
             menuStrip1.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             slidersTableLayout.ResumeLayout(false);
+            slidersTableLayout.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridSizeSlider).EndInit();
@@ -707,5 +739,7 @@
         private TrackBar z_trackBar;
         private Label label3;
         private Label z_label;
+        private RadioButton radioButtonTexture;
+        private CheckBox checkBoxNormalMap;
     }
 }

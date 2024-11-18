@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
 using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace GK_BezierSurface
 {
@@ -33,7 +34,11 @@ namespace GK_BezierSurface
         public float zAnimation { get; set; }
         public bool isAnimated { get; set; }
         public System.Windows.Forms.Timer animationTimer { get; set; }
-        public float angle = 0f;
+        public float angle { get; set; }
+
+        public Bitmap scaledImage { get; set; }
+
+        public bool isNormalMap { get; set; }
 
 
         public Form1()
@@ -68,12 +73,25 @@ namespace GK_BezierSurface
             // Animacja
             zAnimation = z_trackBar.Value;
             animationTimer = new System.Windows.Forms.Timer();
-            animationTimer.Interval = 500;
+            animationTimer.Interval = 2000;
             animationTimer.Tick += (sender, args) => AnimationTimer_Tick(sender, args);
             isAnimated = false;
+            angle = 0f;
 
             // Światło
             lightDirection = new Vector3(120, 120, zAnimation);
+
+            // Mapa wektorów normalnych
+            isNormalMap = false;
+
+            // Wczytanie domyślnej tekstury
+            ReadPoints(@"controlPoints\initialPoints.txt");
+            pointsLoaded = true;
+            scaledImage = new Bitmap(@"textures\normalMap1.jpg");
+            radioButtonTexture.Enabled = true;
+            radioButtonTexture.Checked = true;
+            SetUpTriangles();
+            drawingPanel.Invalidate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -102,13 +120,24 @@ namespace GK_BezierSurface
                 // Wypełnianie trójkątów
                 foreach (Triangle triangle in triangles)
                 {
+                    triangle.ks = ks;
+                    triangle.kd = kd;
+                    triangle.m = m;
+                    triangle.lightDirection = lightDirection;
+                    triangle.isNormalMap = isNormalMap;
+
                     if (radioButtonGrid.Checked)
                     {
                         triangle.DrawTriangle(g);
                     }
                     else if (radioButtonFill.Checked)
                     {
-                        triangle.FillTriangle(g, bitmap);
+                        triangle.FillTriangle(g, bitmap, false);
+                    }
+                    else if (radioButtonTexture.Checked)
+                    {
+                        triangle.texture = scaledImage;
+                        triangle.FillTriangle(g, bitmap, true);
                     }
                 }
 
@@ -123,6 +152,10 @@ namespace GK_BezierSurface
                         g.FillEllipse(Brushes.Green, controlPoints[i, j].prevR.X - 5, controlPoints[i, j].prevR.Y - 5, 10, 10);
                     }
                 }
+
+                // Punkt oznaczający pozycję światła
+                if (radioButtonTexture.Checked || radioButtonFill.Checked)
+                    g.FillEllipse(Brushes.White, lightDirection.X - 6, lightDirection.Y - 6, 12, 12);
             }
         }
 
@@ -265,9 +298,6 @@ namespace GK_BezierSurface
 
 
 
-
-
-
         // Wczytywanie punktów kontrolnych z pliku
         private void ReadPoints(string filePath)
         {
@@ -325,32 +355,42 @@ namespace GK_BezierSurface
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = openFileDialog.FileName;
-
+                    Console.WriteLine($"{filePath}");
                     ReadPoints(filePath);
                 }
             }
             pointsLoaded = true;
             rotateOXSlider.Value = 0;
             rotateOZSlider.Value = 0;
+
             SetUpTriangles();
 
             drawingPanel.Invalidate();
         }
 
+
+        // Radiobuttons
         private void radioButtonGrid_Click(object sender, EventArgs e)
         {
             triangles = new List<Triangle>();
             SetUpTriangles();
             drawingPanel.Invalidate();
         }
-
         private void radioButtonFill_Click(object sender, EventArgs e)
         {
             triangles = new List<Triangle>();
             SetUpTriangles();
             drawingPanel.Invalidate();
         }
+        private void radioButtonTexture_Click(object sender, EventArgs e)
+        {
+            triangles = new List<Triangle>();
+            SetUpTriangles();
+            drawingPanel.Invalidate();
+        }
 
+
+        // Ustawienie koloru obiektu
         private void surfaceColorButton_Click(object sender, EventArgs e)
         {
             ColorDialog MyDialog = new ColorDialog();
@@ -366,6 +406,7 @@ namespace GK_BezierSurface
             drawingPanel.Invalidate();
         }
 
+        // Ustawienie koloru światła
         private void setLightButton_Click(object sender, EventArgs e)
         {
             ColorDialog MyDialog = new ColorDialog();
@@ -376,90 +417,99 @@ namespace GK_BezierSurface
                 lightColor = new SolidBrush(MyDialog.Color);
                 setLightButton.BackColor = MyDialog.Color;
             }
-
             triangles = new List<Triangle>();
             SetUpTriangles();
             drawingPanel.Invalidate();
         }
 
+        // Import tekstury
         private void importTextureButton_Click(object sender, EventArgs e)
         {
-
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "Obrazy (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap ogBitmap = new Bitmap(dialog.FileName);
+                    Console.WriteLine(dialog.FileName);
+                    scaledImage = ogBitmap;
+                    radioButtonTexture.Enabled = true;
+                }
+            }
+            drawingPanel.Invalidate();
         }
 
+
+        // Funkcje odpowiadajace za zmiany ustawien suwakow
         private void kd_trackBar_ValueChanged(object sender, EventArgs e)
         {
             kd = (float)kd_trackBar.Value / 100;
-            triangles = new List<Triangle>();
-            SetUpTriangles();
-
             drawingPanel.Invalidate();
         }
-
         private void ks_trackBar_ValueChanged(object sender, EventArgs e)
         {
             ks = (float)ks_trackBar.Value / 100;
-            triangles = new List<Triangle>();
-            SetUpTriangles();
-
             drawingPanel.Invalidate();
         }
-
         private void m_trackBar_ValueChanged(object sender, EventArgs e)
         {
             m = m_trackBar.Value;
-            triangles = new List<Triangle>();
-            SetUpTriangles();
-
             drawingPanel.Invalidate();
         }
-
         private void z_trackBar_ValueChanged(object sender, EventArgs e)
         {
             zAnimation = z_trackBar.Value;
             z_label.Text = zAnimation.ToString();
 
             lightDirection = new Vector3(lightDirection.X, lightDirection.Y, zAnimation);
-            triangles = new List<Triangle>();
-            SetUpTriangles();
 
             drawingPanel.Invalidate();
         }
 
+
+        // Funkcje do animacji
         private void startAnimationBtn_Click_1(object sender, EventArgs e)
         {
-            if (isAnimated && radioButtonFill.Checked)
+            if (isAnimated && (radioButtonFill.Checked || radioButtonTexture.Checked))
             {
                 // Zatrzymaj animację
-                this.Text = "Start Animation";
                 animationTimer.Stop();
                 isAnimated = false;
+                startAnimationBtn.Text = "Start Animation";
             }
-            else
+            else if (radioButtonFill.Checked || radioButtonTexture.Checked)
             {
                 // Rozpocznij animację
-                this.Text = "Stop Animation";
                 animationTimer.Start();
                 isAnimated = true;
+                startAnimationBtn.Text = "Stop Animation";
+            }
+        }
+        private void AnimationTimer_Tick(object? sender, EventArgs e)
+        {
+            if (isAnimated)
+            {
+                PointF center = new PointF(0, 0);
+                float radius = 120;
+
+                angle += (float)Math.PI / 5;
+                Vector3 light = new Vector3();
+
+                light.X = center.X + radius * (float)Math.Cos(angle);
+                light.Y = center.Y + radius * (float)Math.Sin(angle);
+                light.Z = zAnimation;
+
+                this.lightDirection = light;
+                drawingPanel.Invalidate();
             }
         }
 
-        // Animacja
-        private void AnimationTimer_Tick(object? sender, EventArgs e)
+        private void checkBoxNormalMap_Click(object sender, EventArgs e)
         {
-            PointF center = new PointF(0, 0);
-            float radius = 120;
-
-            angle += (float)Math.PI / 5;
-            Vector3 light = new Vector3();
-
-            light.X = center.X + radius * (float)Math.Cos(angle);
-            light.Y = center.Y + radius * (float)Math.Sin(angle);
-            light.Z = zAnimation;
-
-            this.lightDirection = light;
-            triangles = new List<Triangle>();
-            SetUpTriangles();
+            if (checkBoxNormalMap.Checked)
+                isNormalMap = true;
+            else
+                isNormalMap = false;
 
             drawingPanel.Invalidate();
         }

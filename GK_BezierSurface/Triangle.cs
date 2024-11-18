@@ -29,6 +29,13 @@ namespace GK_BezierSurface
         public Vector3 lightColor { get; set; }
         public Vector3 lightDirection {  get; set; }
 
+        public Bitmap texture {  get; set; }
+
+        public float d00, d01, d11, denom;
+        public Vector2 a, b, c;
+
+        public bool isNormalMap { get; set; }
+
 
         public Triangle(Vertex v1, Vertex v2, Vertex v3, float kd, float ks, int m,
             SolidBrush fillColor, SolidBrush lightColor, Vector3 lightDirection)
@@ -46,7 +53,29 @@ namespace GK_BezierSurface
             this.lightDirection = lightDirection;
 
             edgeTable = new List<List<Edge>>();
+            texture = new Bitmap(1, 1);
+
+            isNormalMap = false;
+
             SetUpEdgeTable();
+            PrecomputeBarycentricData();
+        }
+
+        // Przygotowanie wartości do obliczania współrzędnych barycentrycznych
+        public void PrecomputeBarycentricData()
+        {
+            a = new Vector2(vertex1.prevR.X, vertex1.prevR.Y);
+            b = new Vector2(vertex2.prevR.X, vertex2.prevR.Y);
+            c = new Vector2(vertex3.prevR.X, vertex3.prevR.Y);
+
+            Vector2 v0v1 = b - a;
+            Vector2 v0v2 = c - a;
+
+            d00 = Vector2.Dot(v0v1, v0v1);
+            d01 = Vector2.Dot(v0v1, v0v2);
+            d11 = Vector2.Dot(v0v2, v0v2);
+
+            denom = d00 * d11 - d01 * d01;
         }
 
         // Przygotowanie tablicy ET
@@ -84,7 +113,7 @@ namespace GK_BezierSurface
             this.edgeTable = ET;
         }
 
-        public void FillTriangle(Graphics g, DirectBitmap bitmap)
+        public void FillTriangle(Graphics g, DirectBitmap bitmap, bool isTexture)
         {
             // Włączony Antyaliasing
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -124,7 +153,7 @@ namespace GK_BezierSurface
                         {
                             PointF point = new PointF(x, scanline);
 
-                            (byte br, byte bg, byte bb) = CalculatePointColor(point);
+                            (byte br, byte bg, byte bb) = CalculatePointColor(point, isTexture);
                             Color col = Color.FromArgb(br, bg, bb);
 
                             int posX = (int)Math.Ceiling(point.X + (bitmap.Width / 2));
@@ -162,27 +191,12 @@ namespace GK_BezierSurface
         // Wyznaczenie współrzędnych barycentrycznych
         public Vector3 CalculateBarycentricCoordinates(PointF point)
         {
-            // Przekształcenie punktów w przestrzeń 2D
             Vector2 p = new Vector2(point.X, point.Y);
-            Vector2 a = new Vector2(vertex1.prevR.X, vertex1.prevR.Y);
-            Vector2 b = new Vector2(vertex2.prevR.X, vertex2.prevR.Y);
-            Vector2 c = new Vector2(vertex3.prevR.X, vertex3.prevR.Y);
-
-            // Obliczanie wektorów
-            Vector2 v0v1 = b - a;
-            Vector2 v0v2 = c - a;
             Vector2 v0p = p - a;
 
-            // Obliczanie pól powierzchni
-            float d00 = Vector2.Dot(v0v1, v0v1);
-            float d01 = Vector2.Dot(v0v1, v0v2);
-            float d11 = Vector2.Dot(v0v2, v0v2);
-            float d20 = Vector2.Dot(v0p, v0v1);
-            float d21 = Vector2.Dot(v0p, v0v2);
+            float d20 = Vector2.Dot(v0p, b - a);
+            float d21 = Vector2.Dot(v0p, c - a);
 
-            float denom = d00 * d11 - d01 * d01;
-
-            // Obliczanie współczynników barycentrycznych
             float v = (d11 * d20 - d01 * d21) / denom;
             float w = (d00 * d21 - d01 * d20) / denom;
             float u = 1.0f - v - w;
@@ -190,25 +204,81 @@ namespace GK_BezierSurface
             return new Vector3(u, v, w);
         }
 
+
         // Wyznaczenie koloru piksela
-        public (byte r, byte g, byte b) CalculatePointColor(PointF point)
+        public (byte r, byte g, byte b) CalculatePointColor(PointF point, bool isTexture)
         {
             // Wyznaczenie współrzędnych barycentrycznych
             Vector3 bary = CalculateBarycentricCoordinates(point);
-
-            // Interpolacja współrzędnej Z
-            Vector3 vertex = (
-                bary.X * this.vertex1.prevR + 
-                bary.Y * this.vertex2.prevR +
-                bary.Z * this.vertex3.prevR
-            );
-
 
             // Interpolacja wektorów normalnych
             Vector3 interpolatedNormal = Vector3.Normalize(
                 bary.X * this.vertex1.vectorN +
                 bary.Y * this.vertex2.vectorN +
                 bary.Z * this.vertex3.vectorN
+            );
+
+            // Wyznaczenie koloru obiektu
+            Vector3 objectColor = BrushToVector3(new SolidBrush(Color.White));
+            if (isTexture)
+            {
+                Color localColor;
+                float u = bary.X * this.vertex1.u +
+                    bary.Y * this.vertex2.u +
+                    bary.Z * this.vertex3.u;
+                float v = bary.X * this.vertex1.v +
+                    bary.Y * this.vertex2.v +
+                    bary.Z * this.vertex3.v;
+
+                int x = (int)Math.Floor(v * (texture.Width - 1));
+                int y = (int)Math.Floor(u * (texture.Height - 1));
+                if (x >= 0 && x < texture.Width && y >= 0 && y < texture.Height)
+                {
+                    localColor = texture.GetPixel(x, y);
+                    SolidBrush brush = new SolidBrush(localColor);
+                    objectColor = BrushToVector3(brush);
+                }
+
+                // Przypadek, gdy isNormalMap
+                if (isNormalMap)
+                {
+                    // Interpolacja wektorów Pu
+                    Vector3 interpolatedVectorPu = Vector3.Normalize(
+                        bary.X * this.vertex1.vectorPu +
+                        bary.Y * this.vertex2.vectorPu +
+                        bary.Z * this.vertex3.vectorPu
+                    );
+
+                    // Interpolacja wektorów Pv
+                    Vector3 interpolatedVectorPv = Vector3.Normalize(
+                        bary.X * this.vertex1.vectorPv +
+                        bary.Y * this.vertex2.vectorPv +
+                        bary.Z * this.vertex3.vectorPv
+                    );
+
+                    Matrix4x4 matrix = new Matrix4x4(
+                        interpolatedVectorPu.X, interpolatedVectorPv.X, interpolatedNormal.X, 0,
+                        interpolatedVectorPu.Y, interpolatedVectorPv.Y, interpolatedNormal.Y, 0,
+                        interpolatedVectorPu.Z, interpolatedVectorPv.Z, interpolatedNormal.Z, 0,
+                        0, 0, 0, 1
+                    );
+
+                    Vector4 ocExtended = new Vector4(objectColor, 0);
+                    Vector4 result = Vector4.Transform(ocExtended, matrix);
+                    objectColor = new Vector3(result.X, result.Y, result.Z);
+                }
+            }
+            else
+            {
+                objectColor = fillColor;
+            }
+
+
+            // Interpolacja punktu
+            Vector3 vertex = (
+                bary.X * this.vertex1.prevR + 
+                bary.Y * this.vertex2.prevR +
+                bary.Z * this.vertex3.prevR
             );
 
             // Wyznaczenie wektorów L i V
@@ -218,12 +288,12 @@ namespace GK_BezierSurface
 
             // Wyznaczenie składowej rozproszonej
             float cosNL = Math.Max(0, Vector3.Dot(interpolatedNormal, L));
-            Vector3 diffuse = kd * lightColor * fillColor * cosNL;
+            Vector3 diffuse = kd * lightColor * objectColor * cosNL;
 
             // Wyznaczenie składowej zwierciadlanej
             Vector3 R = Vector3.Normalize(2 * cosNL * interpolatedNormal - L);
             float cosVR = Math.Max(0, Vector3.Dot(V, R));
-            Vector3 specular = ks * lightColor * fillColor * (float)Math.Pow(cosVR, m);
+            Vector3 specular = ks * lightColor * objectColor * (float)Math.Pow(cosVR, m);
 
 
             Vector3 color = diffuse + specular;
@@ -231,9 +301,9 @@ namespace GK_BezierSurface
             byte g = (byte)Math.Clamp((int)(color.Y * 255), 0, 255);
             byte b = (byte)Math.Clamp((int)(color.Z * 255), 0, 255);
 
-            //Vector3 test = new Vector3(0.68f, 0.85f, 0.90f);
             return (r, g, b);
         }
+
 
         // Konwertuje SolidBrush na Vector3
         public static Vector3 BrushToVector3(SolidBrush brush)
